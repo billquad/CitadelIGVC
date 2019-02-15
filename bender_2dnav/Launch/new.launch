@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Launch the PID, Odom Calculation, and Twist to Motors Nodes-->
+    <rosparam param="ticks_meter">2469</rosparam>
+    <rosparam param ="encoder_max">2147483647</rosparam>
+    <rosparam param ="encoder_min">-2147483647</rosparam>
+
+<node pkg="differential_drive" type="pid_velocity.py" name="lpid_velocity">
+        <remap from="wheel" to="left_ticks"/>
+        <remap from="motor_cmd" to="lmotor_cmd"/>
+        <remap from="wheel_vtarget" to="lwheel_vtarget"/>
+        <remap from="wheel_vel" to="lwheel_vel"/>
+        <rosparam param="Kp">2</rosparam>
+        <rosparam param="Ki">0</rosparam>
+        <rosparam param="Kd">0</rosparam>
+        <rosparam param="out_min">-10</rosparam>
+        <rosparam param="out_max">10</rosparam>
+        <rosparam param="rate">30</rosparam>
+        <rosparam param="timeout_ticks">4</rosparam>
+        <rosparam param="rolling_pts">2</rosparam>
+    </node>
+
+    <node pkg="differential_drive" type="pid_velocity.py" name="rpid_velocity">
+        <remap from="wheel" to="right_ticks"/>
+        <remap from="motor_cmd" to="rmotor_cmd"/>
+        <remap from="wheel_vtarget" to="rwheel_vtarget"/>
+        <remap from="wheel_vel" to="rwheel_vel"/>
+        <rosparam param="Kp">2</rosparam>
+        <rosparam param="Ki">0</rosparam>
+        <rosparam param="Kd">0</rosparam>
+        <rosparam param="out_min">-10</rosparam>
+        <rosparam param="out_max">10</rosparam>
+        <rosparam param="rate">30</rosparam>
+        <rosparam param="timeout_ticks">4</rosparam>
+        <rosparam param="rolling_pts">2</rosparam>
+    </node>
+
+    <node pkg="differential_drive" type="twist_to_motors.py" name="twist_to_motors" output="screen">
+      <remap from="twist" to="cmd_vel"/>
+      <rosparam param="base_width">0.840</rosparam>
+    </node>
+
+    <node pkg ="differential_drive" type="diff_tf.py" name="diff_tf">
+      <remap from="lwheel" to="left_ticks"/>
+      <remap from="rwheel" to="right_ticks"/>
+    </node>
+
+
+<!-- rostopic pub -r 50 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}' cmd_vel:=twist
+-->
+
+</launch>
