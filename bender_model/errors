@@ -1,0 +1,28 @@
+Error:   Unable to parse component [${base_len}] to a double (while parsing a vector value)
+         at line 149 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Could not parse visual element for Link [base_link]
+         at line 452 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Unable to parse component [${camera_size}] to a double (while parsing a vector value)
+         at line 149 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Could not parse visual element for Link [camera_link]
+         at line 452 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Unable to parse component [${hokuyo_size}] to a double (while parsing a vector value)
+         at line 149 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Could not parse visual element for Link [hokuyo_link]
+         at line 452 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Unable to parse component [${imu_size}] to a double (while parsing a vector value)
+         at line 149 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Could not parse visual element for Link [imu_link]
+         at line 452 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Unable to parse component [${imu_size}] to a double (while parsing a vector value)
+         at line 149 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Could not parse visual element for Link [gps_link]
+         at line 452 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/link.cpp
+Error:   Unable to parse component [${1+base_height}] to a double (while parsing a vector value)
+         at line 103 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/pose.cpp
+Error:   Malformed parent origin element for joint [camera_joint]
+         at line 402 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/joint.cpp
+Error:   joint xml is not initialized correctly
+         at line 207 in /build/urdfdom-UJ3kd6/urdfdom-0.4.1/urdf_parser/src/model.cpp
+ERROR: Model Parsing the xml failed
+
