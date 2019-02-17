@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" >
+      <param name="rob_st_pub/robot_description" command="$(find xacro)/xacro '$(find bender_model)/model.urdf.xacro'" />
+      <remap from="joint_states" to="different_joint_states" />
+    </node>
+  </launch>
