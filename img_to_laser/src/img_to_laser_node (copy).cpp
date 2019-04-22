@@ -7,7 +7,7 @@
 
 #define PI 3.1415926535897
 #define INCREMENT 0.01745329251
-#define NUM_READINGS 180
+#define NUM_READINGS 360
 #define SCALING_FACTOR 100 // cells/m (find experimentally)
 
 class img_to_laser
@@ -21,15 +21,15 @@ public:
     sub_ = nh_.subscribe("final_image", 1000, &img_to_laser::range_finder, this);
 
     // Take the topics from params.yaml
-    nh_.param("virtual_lidar_x", lid_x, 110);
-    nh_.param("virtual_lidar_y", lid_y, 110);
+    nh_.param("virtual_lidar_x", lid_x, 400);
+    nh_.param("virtual_lidar_y", lid_y, 400);
 
     // Filling up virtual scan data.
     ros::Time scan_time = ros::Time(0);
     scan_.header.stamp = scan_time;
     scan_.header.frame_id = "laser_2";
-    scan_.angle_min = -(PI/2) + INCREMENT;
-    scan_.angle_max = (PI/2);
+    scan_.angle_min = -PI + INCREMENT;
+    scan_.angle_max = PI;
     scan_.angle_increment = INCREMENT;
     scan_.time_increment = 0;
     scan_.scan_time = 0.1;
@@ -41,7 +41,7 @@ public:
   void range_finder(const sensor_msgs::ImageConstPtr& msg)
   {
     // Flush Scan at start of every callback
-    for(int i=0;i<NUM_READINGS;i++){
+    for(int i=0;i<360;i++){
       scan_.ranges[i]=std::numeric_limits<float>::infinity();
       scan_.intensities[i] = 0;
     }
@@ -69,13 +69,13 @@ public:
                 Calculate x distance and y distance and
                 invert y (In image convention y is inverted)
             */
-            int x_dist = 55+ i - lid_x;
+            int x_dist = i - lid_x;
             int y_dist = -(j - lid_y);
             float tot_dist = sqrt(x_dist*x_dist + y_dist*y_dist)/SCALING_FACTOR;
             int theta = floor(atan2(y_dist, x_dist) * 180 / PI + 180);
 
             // Safety
-            theta = theta%180;
+            theta = theta%360;
 
             if (tot_dist < scan_.ranges[theta])
             {

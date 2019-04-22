@@ -48,7 +48,7 @@ class cvBridgeDemo():
         # Create the OpenCV display window for the RGB image
         self.rgb_window_name = self.node_name
         cv2.namedWindow(self.rgb_window_name, cv2.WINDOW_NORMAL)
-        cv2.moveWindow(self.rgb_window_name, 1250, 1100)
+        cv2.moveWindow(self.rgb_window_name, 1280, 720)
                 
         # And one for the depth image
         #self.depth_window_name = "Depth Image"
@@ -120,8 +120,8 @@ class cvBridgeDemo():
 	hi_white = np.array([180, 255, 255])        #same
 	mask = cv2.inRange(hsv, low_white, hi_white)#mask gets anything in the range of those two values
 	edges = cv2.Canny(mask, 75, 150)            #Performs a Canny edge detect on mask
-	pts1 = np.float32([[310, 165], [970, 165], [1265, 715], [15, 715]])  #Set ROI 
-    	pts2 = np.float32([[0, 0], [1249, 0], [1249, 1099], [0, 1099]])    #Sets final pixel placement for ROI 
+	pts1 = np.float32([[340, 225], [940, 225], [140, 600], [1140, 600]])   #Set ROI 
+    	pts2 = np.float32([[0, 0], [1200, 0], [0, 700], [1200, 700]])    #Sets final pixel placement for ROI 
     	matrix = cv2.getPerspectiveTransform(pts1, pts2) 
 	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 50, maxLineGap=5)     #performs HLT of edges
     
@@ -130,9 +130,8 @@ class cvBridgeDemo():
         	for line in lines:
             		x1, y1, x2, y2 = line[0]
             		cv2.line(mask, (x1, y1), (x2, y2), (0, 255, 0), 5)      #puts green lines over frame
-      
-     	final = cv2.warpPerspective(mask, matrix, (1250, 1100))  #do (lines, ()) for lines detected
-    	result = cv2.resize(final, (110, 110))
+            
+    	result = cv2.warpPerspective(mask, matrix, (1280, 720))
         
         return result
     
